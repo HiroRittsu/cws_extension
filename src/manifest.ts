@@ -19,7 +19,7 @@ const manifest = defineManifest(async (env) => ({
       js: ['content/index.tsx'],
     },
   ],
-  host_permissions: ['<all_urls>'],
+  host_permissions: ['http://*/*', 'https://*/*'],
   options_ui: {
     page: 'options/options.html',
     open_in_tab: true,
@@ -48,7 +48,7 @@ const manifest = defineManifest(async (env) => ({
     '48': 'images/extension_48.png',
     '128': 'images/extension_128.png',
   },
-  permissions: ['storage', 'tabs'],
+  permissions: ['storage', 'tabs', 'activeTab', 'scripting'],
 }));
 
 export default manifest;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   decrement,
@@ -24,7 +24,19 @@ export function Counter() {
         <button
           className="ml-1 mr-2 px-3 text-2xl outline-none border-2 border-solid border-transparent text-purple-500 pb-1 cursor-pointer bg-purple-800 bg-opacity-10 hover:bg-opacity-20 rounded-[2px]"
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => {
+            dispatch(decrement());
+
+            chrome.runtime.sendMessage(
+              {
+                action: 'callExternalFunction',
+                argument: 'Hello from content script!',
+              },
+              function (response) {
+                console.log('Response from background script:', response);
+              }
+            );
+          }}
         >
           -
         </button>
